@@ -1,20 +1,23 @@
 # Codes
 #header
 
-#include <stdio.h>
-#define YES 1
-#define NO 0
-#define MAXLINE 1000
+	#include <stdio.h>
+	#define YES 1
+	#define NO 0
+	#define MAXLINE 1000
 
-void process_line(char buffer[]);
-int break_flag = 0;
+	void process_line(char buffer[]);
+	int break_flag = 0;
 
 
 #main_file
-#include "file4.h"
 
-int main(void)
-{	
+	#include "file4.h"
+
+	int main(void)
+
+ 	{	
+ 
 	char line[MAXLINE];
 	printf("Type text: ");
 	gets(line);
@@ -27,10 +30,13 @@ int main(void)
 	else
 		printf("Fixed text: %s\n", line);
 	return 0;
-}
 
-void process_line(char buffer[])
-{
+        }
+	void process_line(char buffer[])
+
+
+	{
+
 	char sym; 
 	int count = 0;
 	int length;
@@ -40,7 +46,7 @@ void process_line(char buffer[])
 	int pos; 
 	int start; 
 	int j;
-
+	
 	flag = NO;
 	found = NO;
 	start = 0;
