@@ -2,102 +2,52 @@
 #header
 
 	#include <stdio.h>
-	#define YES 1
-	#define NO 0
-	#define MAXLINE 1000
-
-	void process_line(char buffer[]);
-	int break_flag = 0;
+	#define len 10
 
 
 #main_file
 
-	#include "file4.h"
+	#include "file5.h"
 
 	int main(void)
-
- 	{	
- 
-	char line[MAXLINE];
-	printf("Type text: ");
-	gets(line);
-	process_line(line);
-	if(break_flag == 1)
 	{
-		printf("You've typed something except letters \n");
-		return 0;
-	}
-	else
-		printf("Fixed text: %s\n", line);
-	return 0;
-
-        }
-	void process_line(char buffer[])
-
-
-	{
-
-	char sym; 
+	int seq[len];  
+	int elem;
 	int count = 0;
-	int length;
-	int flag; 
-	int found; 
-	int i; 
-	int pos; 
-	int start; 
-	int j;
 	
-	flag = NO;
-	found = NO;
-	start = 0;
- 	i = 0;
-	pos = 0;
-	printf("Type length of the word: ");
-	scanf("%d", &length);
-
-	do
+	printf("Type 10 numbers between -10000 and 10000: ");
+	
+	for(elem = 0; elem < len; elem++)
 	{
-		sym = buffer[i];
-		if ((sym >= 'a' && sym <= 'z') || (sym >= 'A' && sym <= 'Z') || sym == ' ' || sym == '.' || sym == ',' || sym == '\n' || sym == '\0' || sym == ';' || sym == '!' || sym == '?' || sym == ':' || sym == '-')
+		scanf("%d", &seq[elem]);
+		if ((seq[elem] >= 10000) || (seq[elem] <= -10000))
 		{
- 		if(sym == ' ' || sym == '.' || sym == ',' || sym == '\n' || sym == '\0' || sym == ';' || sym == '!' || sym == '?' || sym == ':' || sym == '-')
- 		{
- 			if(flag == YES)
- 			{
-				if(found == NO)
-				{
- 					for(j = start; j < i; j++)
- 						buffer[pos++] = buffer[j];
- 				}
- 			}
- 			flag = NO;
-			count = 0;
- 			buffer[pos++] = sym;
- 		}
- 		else
- 		{
+ 			printf("some elements in array are out of terms");
+			return 0;
+		}
+	}
+	for(elem = 0; elem < len; elem++)
+ 	{
+ 		if(seq[elem] == (seq[elem-1] + seq[elem+1])/2)
+		{
 			count = count + 1;
- 			if(flag == NO)
-			{
- 				start = i; 
-			}
- 			if( count > length )
-			{
- 				found = YES;
-			}
- 			else
-			{
- 				found = NO;
-			}
- 			flag = YES;
- 		}
- 		i++;
+		}
+ 	}
+
+	if (count > 0)
+	{
+		if(count == len - 2)
+		{
+			printf("All elements are arythmethic progression");
 		}
 		else
 		{
-			break_flag = 1;
-			break;
+			printf("Some elements are arythmethic progression");
 		}
 	}
-	while((sym != '\0') & (break_flag != 1));
-} 
+	else
+	{
+		printf("Elements are'nt arythmethic progression");
+	}
+	return 0;
+	}
