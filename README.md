@@ -2,52 +2,89 @@
 #header
 
 	#include <stdio.h>
-	#define len 10
+	#define h 3 
+	#define w 3 
 
 
 #main_file
 
-	#include "file5.h"
+	#include "file6.h"
 
 	int main(void)
 	{
-	int seq[len];  
-	int elem;
-	int count = 0;
-	
-	printf("Type 10 numbers between -10000 and 10000: ");
-	
-	for(elem = 0; elem < len; elem++)
-	{
-		scanf("%d", &seq[elem]);
-		if ((seq[elem] >= 10000) || (seq[elem] <= -10000))
-		{
- 			printf("some elements in array are out of terms");
-			return 0;
-		}
-	}
-	for(elem = 0; elem < len; elem++)
- 	{
- 		if(seq[elem] == (seq[elem-1] + seq[elem+1])/2)
-		{
-			count = count + 1;
-		}
- 	}
+	int array[h][w]; 
+	float aver; 
+	int i;
+	int j;
+	float sort_ar[h][w+1];
+	float buffer[h][w];
+	float min_aver = 10000;
+	float max_aver = -10000;
+	int flag = 1;
 
-	if (count > 0)
-	{
-		if(count == len - 2)
+	printf("Type numbers of matrix between -10000 and 10000: ");
+	for( i = 0; i < h; i++ )
+ 		for( j = 0; j < w; j++ )
 		{
-			printf("All elements are arythmethic progression");
+ 			scanf("%d", &array[i][j]);
+			if ((array[i][j] >= 10000) || (array[i][j] <= -10000))
+			{
+ 				printf("some elements in array are out of terms");
+				return 0;
+			}
 		}
-		else
+
+	aver = 0;
+	for(i = 0; i < h; i++)
+	{
+ 		for(j = 0; j < w; j++)
 		{
-			printf("Some elements are arythmethic progression");
+ 			aver = aver + array[i][j];
+			sort_ar[i][j + 1] = array[i][j];
+		} 
+		aver = aver/w;
+		sort_ar[i][0] = aver;
+		aver = 0;
+	}
+
+	for (i = 0; i < h; i++)
+	{
+		for (j = 0; j < 1; j++)
+		{
+			if (sort_ar[i][j] < min_aver)
+				min_aver = sort_ar[i][j];
+			if (sort_ar[i][j] > max_aver)
+				max_aver = sort_ar[i][j];
 		}
 	}
-	else
+
+	while (flag == 1)
 	{
-		printf("Elements are'nt arythmethic progression");
+		for(i = 0; i < h; i++)
+		{
+			if(sort_ar[i][0] < sort_ar[i+1][0])
+			{
+ 				for(j = 0; j <= w; j++)
+				{
+					buffer[i][j] = sort_ar[i][j];
+					sort_ar[i][j] = sort_ar[i+1][j];
+					sort_ar[i+1][j] = buffer[i][j];
+				}
+			}
+		}
+		if((sort_ar[h - 1][0] == min_aver) && (sort_ar[0][0] == max_aver))
+		{
+			flag = 0;
+		}
 	}
+
+	for( i = 0; i < h; i++ )
+ 	{
+ 		for( j = 0; j <= w; j++ )
+		{
+ 			printf("%4f ", sort_ar[i][j]);
+		}
+ 		printf("\n");
+ 	}
 	return 0;
 	}
