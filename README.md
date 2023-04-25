@@ -22,7 +22,7 @@
 	float max_aver = -10000;
 	int flag = 1;
 
-	printf("Type numbers of matrix between -10000 and 10000: ");
+	printf("Type numbers of matrix between -10000 and 10000: \n");
 	for( i = 0; i < h; i++ )
  		for( j = 0; j < w; j++ )
 		{
