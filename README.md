@@ -86,3 +86,36 @@
  	}
 	return 0;
 	}
+
+#Header 7
+
+	#include <stdio.h>
+#main_file 7
+
+	int main(void)
+	{
+  	long N;
+  	unsigned long calc_num;
+  	int mask = 1;
+  	int scan_check; 
+
+  	printf("Enter a number: ");
+  	scan_check = scanf("%ld", &N); 
+
+  	if (scan_check != 1) 
+  	{
+    		printf("Wrong input\n");
+    		return 0;
+  	}
+
+  	calc_num = (unsigned long)N;
+
+  	while( calc_num % 2 != 1 ) 
+   	{
+     		mask = mask * 2;
+     		calc_num >>= 1;
+   	}
+
+  	printf("Result: %d\n", mask);
+  	return 0;
+	}
